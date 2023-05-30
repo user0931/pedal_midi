@@ -1,19 +1,18 @@
 #include <Arduino.h>
 #include <Pushbutton.h>
 
+/* Includes para la pantalla */
 #include <U8g2lib.h>
-
 #ifdef U8X8_HAVE_HW_SPI
 #include <SPI.h>
 #endif
 #ifdef U8X8_HAVE_HW_I2C
 #include <Wire.h>
 #endif
-
+/* Pantalla de 128*64 SPI */
 U8G2_SSD1309_128X64_NONAME0_F_4W_SW_SPI u8g2(U8G2_R0, /* clock=*/ 13, /* data=*/ 11, /* cs=*/ 10, /* dc=*/ 9, /* reset=*/ 8); 
 
-/* Definimos los pulsadores y les asignamos el pin donde están conectados primer numero fila, segundo columna por ejemplo
-  1_5 fila 1 quinto pulsador*/
+/* Definimos los pulsadores y les asignamos el pin donde están conectados primer numero fila, segundo columna por ejemplo 1_5 fila 1 quinto pulsador*/
 #define DEF_BUTTON_1_1 22
 Pushbutton button_1_1(DEF_BUTTON_1_1);
 #define DEF_BUTTON_1_2 24
@@ -46,8 +45,7 @@ Pushbutton button_3_4(DEF_BUTTON_3_4);
 Pushbutton button_3_5(DEF_BUTTON_3_5);
 
 
-/* Definimos los leds y les asignamos el pin donde están conectados primer numero fila, segundo columna por ejemplo
-  1_5 fila 1 quinto led*/ */
+/* Definimos los leds y les asignamos el pin donde están conectados primer numero fila, segundo columna por ejemplo 1_5 fila 1 quinto led  */ 
 int led_1_1 = 23;
 int led_1_2 = 25;
 int led_1_3 = 27;
@@ -64,7 +62,7 @@ int led_3_3 = 47;
 int led_3_4 = 49;
 int led_3_5 = 51;
 
-int led2 = 23;
+
 String pos_1 = "11";
 String pos_2 = "22";
 
@@ -86,7 +84,6 @@ void draw1() {
 }
 
 void draw2() {
-  
   Serial.println("Estamos en función draw2");
   u8g2.clearBuffer();					// clear the internal memory
   //u8g2.setFont(u8g2_font_ncenB08_tr);	// choose a suitable font
@@ -97,6 +94,127 @@ void draw2() {
   Serial.println("Fin de función draw2");
 }
 
+void button_1_1_pressed() {
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.println("Estoy en 0042");
+  delay(100);
+  digitalWrite(led_1_1, HIGH); // turn the LED on (HIGH is the voltage level)  
+  delay(200); // wait for a second  
+  digitalWrite(led_1_1, LOW); // turn the LED off by making the voltage LOW  
+  delay(10); // wait for a second  
+  digitalWrite(led_1_2, HIGH); // turn the LED on (HIGH is the voltage level)  
+  delay(200); // wait for a second  
+  digitalWrite(led_1_2, LOW); // turn the LED off by making the voltage LOW  
+  delay(10); // wait for a second
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_1_2_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_1_3_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_1_4_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_1_5_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_2_1_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_2_2_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_2_3_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_2_4_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_2_5_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_3_1_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_3_2_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_3_3_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_3_4_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void button_3_5_pressed() { 
+  Serial.print("Comienza función: ");
+  Serial.println(__func__);
+  Serial.print("Fin de la función: ");
+  Serial.println(__func__);
+}
+void parpadea() {
+    // blink LED
+  digitalWrite(led_1_1, HIGH);
+  delay(100);
+  digitalWrite(led_1_1, LOW);
+  delay(100);
+  digitalWrite(led_1_2, HIGH);
+  delay(100);
+  digitalWrite(led_1_2, LOW);
+  delay(100);
+  digitalWrite(led_1_1, HIGH);
+  delay(100);
+  digitalWrite(led_1_1, LOW);
+  delay(100);
+  digitalWrite(led_1_2, HIGH);
+  delay(100);
+  digitalWrite(led_1_2, LOW);
+  delay(100);
+  draw2();
+
+}
 
 void setup()  
 {  
@@ -121,19 +239,66 @@ void setup()
 }  
 void loop()   
 {  
+   /* Si se pulsa algún pulsador llamamos a su función*/
+   if (button_1_1.getSingleDebouncedPress())
+   {
+     button_1_1_pressed();
+   }
+   if (button_1_2.getSingleDebouncedPress())
+   {
+     button_1_2_pressed();
+   }
+   if (button_1_3.getSingleDebouncedPress())
+   {
+     button_1_3_pressed();
+   }
+   if (button_1_4.getSingleDebouncedPress())
+   {
+     button_1_4_pressed();
+   }
    if (button_1_5.getSingleDebouncedPress())
    {
-    // The button was pressed, so perform some action.
-    Serial.println("Estoy en 0042");
-    delay(100);
-    digitalWrite(led1, HIGH); // turn the LED on (HIGH is the voltage level)  
-    delay(200); // wait for a second  
-    digitalWrite(led1, LOW); // turn the LED off by making the voltage LOW  
-    delay(10); // wait for a second  
-    digitalWrite(led2, HIGH); // turn the LED on (HIGH is the voltage level)  
-    delay(200); // wait for a second  
-    digitalWrite(led2, LOW); // turn the LED off by making the voltage LOW  
-    delay(10); // wait for a second
+     button_1_5_pressed();
+   }
+   if (button_2_1.getSingleDebouncedPress())
+   {
+     button_2_1_pressed();
+   }
+   if (button_2_2.getSingleDebouncedPress())
+   {
+     button_2_2_pressed();
+   }
+   if (button_2_3.getSingleDebouncedPress())
+   {
+     button_2_3_pressed();
+   }
+   if (button_2_4.getSingleDebouncedPress())
+   {
+     button_2_4_pressed();
+   }
+   if (button_2_5.getSingleDebouncedPress())
+   {
+     button_2_5_pressed();
+   }
+   if (button_3_1.getSingleDebouncedPress())
+   {
+     button_3_1_pressed();
+   }
+   if (button_3_2.getSingleDebouncedPress())
+   {
+     button_3_2_pressed();
+   }
+   if (button_3_3.getSingleDebouncedPress())
+   {
+     button_3_3_pressed();
+   }
+   if (button_3_4.getSingleDebouncedPress())
+   {
+     button_3_4_pressed();
+   }
+   if (button_3_5.getSingleDebouncedPress())
+   {
+     button_3_5_pressed();
    }
   /* Method 2: Use the waitForButton() function, which blocks and
    * doesn't return until a button press and release are
@@ -142,25 +307,5 @@ void loop()
   //draw1();
   //button.waitForButton();
   //Serial.println("Estoy en 0040");
-
-  // blink LED
-  digitalWrite(led1, HIGH);
-  delay(100);
-  digitalWrite(led1, LOW);
-  delay(100);
-  digitalWrite(led2, HIGH);
-  delay(100);
-  digitalWrite(led2, LOW);
-  delay(100);
-  digitalWrite(led1, HIGH);
-  delay(100);
-  digitalWrite(led1, LOW);
-  delay(100);
-  digitalWrite(led2, HIGH);
-  delay(100);
-  digitalWrite(led2, LOW);
-  delay(100);
-  draw2();
-
 }
 
