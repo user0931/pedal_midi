@@ -12,12 +12,58 @@
 
 U8G2_SSD1309_128X64_NONAME0_F_4W_SW_SPI u8g2(U8G2_R0, /* clock=*/ 13, /* data=*/ 11, /* cs=*/ 10, /* dc=*/ 9, /* reset=*/ 8); 
 
-/* Definimos los pulsadores y les asignamos el pin donde están conectados */
-#define BUTTON_PIN 24
-Pushbutton button(BUTTON_PIN);
+/* Definimos los pulsadores y les asignamos el pin donde están conectados primer numero fila, segundo columna por ejemplo
+  1_5 fila 1 quinto pulsador*/
+#define DEF_BUTTON_1_1 22
+Pushbutton button_1_1(DEF_BUTTON_1_1);
+#define DEF_BUTTON_1_2 24
+Pushbutton button_1_2(DEF_BUTTON_1_2);
+#define DEF_BUTTON_1_3 26
+Pushbutton button_1_3(DEF_BUTTON_1_3);
+#define DEF_BUTTON_1_4 28
+Pushbutton button_1_4(DEF_BUTTON_1_4);
+#define DEF_BUTTON_1_5 30
+Pushbutton button_1_5(DEF_BUTTON_1_5);
+#define DEF_BUTTON_2_1 32
+Pushbutton button_2_1(DEF_BUTTON_2_1);
+#define DEF_BUTTON_2_2 34
+Pushbutton button_2_2(DEF_BUTTON_2_2);
+#define DEF_BUTTON_2_3 36
+Pushbutton button_2_3(DEF_BUTTON_2_3);
+#define DEF_BUTTON_2_4 38
+Pushbutton button_2_4(DEF_BUTTON_2_4);
+#define DEF_BUTTON_2_5 40
+Pushbutton button_2_5(DEF_BUTTON_2_5);
+#define DEF_BUTTON_3_1 42
+Pushbutton button_3_1(DEF_BUTTON_3_1);
+#define DEF_BUTTON_3_2 44
+Pushbutton button_3_2(DEF_BUTTON_3_2);
+#define DEF_BUTTON_3_3 46
+Pushbutton button_3_3(DEF_BUTTON_3_3);
+#define DEF_BUTTON_3_4 48
+Pushbutton button_3_4(DEF_BUTTON_3_4);
+#define DEF_BUTTON_3_5 50
+Pushbutton button_3_5(DEF_BUTTON_3_5);
 
-/* Definimos los leds y les asignamos el pin donde están conectados */
-int led1 = 22;  
+
+/* Definimos los leds y les asignamos el pin donde están conectados primer numero fila, segundo columna por ejemplo
+  1_5 fila 1 quinto led*/ */
+int led_1_1 = 23;
+int led_1_2 = 25;
+int led_1_3 = 27;
+int led_1_4 = 29;
+int led_1_5 = 31;
+int led_2_1 = 33;
+int led_2_2 = 35;
+int led_2_3 = 37;
+int led_2_4 = 39;
+int led_2_5 = 41;
+int led_3_1 = 43;
+int led_3_2 = 45;
+int led_3_3 = 47;
+int led_3_4 = 49;
+int led_3_5 = 51;
+
 int led2 = 23;
 String pos_1 = "11";
 String pos_2 = "22";
@@ -55,14 +101,30 @@ void draw2() {
 void setup()  
 {  
     Serial.begin(115200);
-    pinMode(22, OUTPUT);  
+    /* Inicializamos como output los pines a los que están conectados los leds*/
     pinMode(23, OUTPUT);
+    pinMode(25, OUTPUT);
+    pinMode(27, OUTPUT);
+    pinMode(29, OUTPUT);
+    pinMode(31, OUTPUT);
+    pinMode(33, OUTPUT);
+    pinMode(35, OUTPUT);
+    pinMode(37, OUTPUT);
+    pinMode(39, OUTPUT);
+    pinMode(41, OUTPUT);
+    pinMode(43, OUTPUT);
+    pinMode(45, OUTPUT);
+    pinMode(47, OUTPUT);
+    pinMode(49, OUTPUT);
+    pinMode(51, OUTPUT);
     u8g2.begin();
 }  
 void loop()   
 {  
-  
-  // rebuild the picture after some delay
+   if (button_1_5.getSingleDebouncedPress())
+   {
+    // The button was pressed, so perform some action.
+    Serial.println("Estoy en 0042");
     delay(100);
     digitalWrite(led1, HIGH); // turn the LED on (HIGH is the voltage level)  
     delay(200); // wait for a second  
@@ -71,15 +133,15 @@ void loop()
     digitalWrite(led2, HIGH); // turn the LED on (HIGH is the voltage level)  
     delay(200); // wait for a second  
     digitalWrite(led2, LOW); // turn the LED off by making the voltage LOW  
-    delay(10); // wait for a second  
-
+    delay(10); // wait for a second
+   }
   /* Method 2: Use the waitForButton() function, which blocks and
    * doesn't return until a button press and release are
    * detected. This function takes care of button debouncing. */
-  Serial.println("Estoy en 0035");
-  draw1();
-  button.waitForButton();
-  Serial.println("Estoy en 0040");
+  //Serial.println("Estoy en 0035");
+  //draw1();
+  //button.waitForButton();
+  //Serial.println("Estoy en 0040");
 
   // blink LED
   digitalWrite(led1, HIGH);
