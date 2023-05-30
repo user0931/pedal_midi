@@ -1,0 +1,117 @@
+#include <Arduino.h>
+#include <U8g2lib.h>
+#include <Wire.h>
+#include "RTClib.h"
+RTC_DS1307 RTC;
+
+#ifdef U8X8_HAVE_HW_SPI
+#include <SPI.h>
+#endif
+#ifdef U8X8_HAVE_HW_I2C
+#include <Wire.h>
+#endif
+
+/*
+  U8glib Example Overview:
+    Frame Buffer Examples: clearBuffer/sendBuffer. Fast, but may not work with all Arduino boards because of RAM consumption
+    Page Buffer Examples: firstPage/nextPage. Less RAM usage, should work with all Arduino boards.
+    U8x8 Text Only Example: No RAM usage, direct communication with display controller. No graphics, 8x8 Text only.
+    
+*/
+
+// Please UNCOMMENT one of the contructor lines below
+// U8g2 Contructor List (Frame Buffer)
+// The complete list is available here: https://github.com/olikraus/u8g2/wiki/u8g2setupcpp
+// Please update the pin numbers according to your setup. Use U8X8_PIN_NONE if the reset pin is not connected
+U8G2_ST7920_128X64_F_SW_SPI u8g2(U8G2_R0, /* clock=*/ 13, /* data=*/ 11, /* CS=*/ 12, /* reset=*/ U8X8_PIN_NONE);
+
+
+//KY015 DHT11 Temperature and humidity sensor 
+int DHpin = 8;
+byte dat [5];
+byte read_data () {
+  byte data;
+  for (int i = 0; i < 8; i ++) {
+    if (digitalRead (DHpin) == LOW) {
+      while (digitalRead (DHpin) == LOW); // wait for 50us
+      delayMicroseconds (30); // determine the duration of the high level to determine the data is '0 'or '1'
+      if (digitalRead (DHpin) == HIGH)
+        data |= (1 << (7-i)); // high front and low in the post
+      while (digitalRead (DHpin) == HIGH); // data '1 ', wait for the next one receiver
+     }
+  }
+return data;
+}
+ 
+void start_test () {
+  digitalWrite (DHpin, LOW); // bus down, send start signal
+  delay (30); // delay greater than 18ms, so DHT11 start signal can be detected
+ 
+  digitalWrite (DHpin, HIGH);
+  delayMicroseconds (40); // Wait for DHT11 response
+ 
+  pinMode (DHpin, INPUT);
+  while (digitalRead (DHpin) == HIGH);
+  delayMicroseconds (80); // DHT11 response, pulled the bus 80us
+  if (digitalRead (DHpin) == LOW);
+  delayMicroseconds (80); // DHT11 80us after the bus pulled to start sending data
+ 
+  for (int i = 0; i < 4; i ++) // receive temperature and humidity data, the parity bit is not considered
+    dat[i] = read_data ();
+ 
+  pinMode (DHpin, OUTPUT);
+  digitalWrite (DHpin, HIGH); // send data once after releasing the bus, wait for the host to open the next Start signal
+}
+ 
+void setup () {
+  u8g2.begin();
+  Serial.begin (9600);
+  Wire.begin();
+  RTC.begin();
+  if (! RTC.isrunning()) {
+    Serial.println("RTC is NOT running!");
+    // following line sets the RTC to the date & time this sketch was compiled
+    RTC.adjust(DateTime(__DATE__, __TIME__));
+  }
+  pinMode (DHpin, OUTPUT);
+}
+ 
+void loop () {
+  DateTime now = RTC.now();
+  u8g2.clearBuffer();          // clear the internal memory
+  u8g2.setFont(u8g2_font_amstrad_cpc_extended_8f);  // choose a suitable font
+  start_test ();
+  u8g2.setCursor(3,10);
+  u8g2.print ("Date : ");
+  u8g2.setCursor(55,10);
+  u8g2.print(now.month(), DEC);
+  u8g2.print('/');
+  u8g2.print(now.day(), DEC);
+  u8g2.print('/');
+  u8g2.print(now.year(), DEC);
+  u8g2.setCursor(3,19);
+  u8g2.print ("Time : ");
+  u8g2.setCursor(62,19);
+  u8g2.print(now.hour(), DEC);
+  u8g2.print(':');
+  u8g2.print(now.minute(), DEC);
+  u8g2.print(':');
+  u8g2.print(now.second(), DEC);
+  u8g2.setCursor (3, 37);
+  u8g2.print ("Humidity :");
+  u8g2.print (dat [0], DEC); // display the humidity-bit integer;
+  u8g2.print ('.');
+  u8g2.print (dat [1], DEC); // display the humidity decimal places;
+  u8g2.println ('%');
+  u8g2.setCursor(3,28);
+  u8g2.print ("Temp :    ");
+  u8g2.print (dat [2], DEC); // display the temperature of integer bits;
+  u8g2.print ('.');
+  u8g2.print (dat [3], DEC); // display the temperature of decimal places;
+  u8g2.println ('C');
+  u8g2.setFont(u8g2_font_profont22_tf);
+  u8g2.drawStr(10,62,"VMFAT-101");
+  u8g2.drawFrame(0, 0, 128, 64);
+  u8g2.sendBuffer();          // transfer internal memory to the display
+  delay (700);
+}

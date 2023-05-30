@@ -1,0 +1,80 @@
+#include <Arduino.h>
+#include <Pushbutton.h>
+#include "U8glib.h"
+U8GLIB_SSD1309_128X64 u8g(13, 11, 10, 9, 8);
+//U8GLIB_SSD1309_128X64 u8g(13, 11, 10, 9, 8);
+// SPI Com: SCK = 13, MOSI = 11, CS = 10,
+// A0 = 9, RES = 8
+
+#define BUTTON_PIN 24
+Pushbutton button(BUTTON_PIN);
+
+int led1 = 22;  
+int led2 = 23;
+String pos_1 = "11";
+String pos_2 = "22";
+
+void draw() {
+  
+  Serial.println("Estamos en función draw");
+  //u8g.setFont(u8g_font_unifont);
+  //u8g.drawStr( 0, 22, "Hello World!");
+
+  u8g.setFont(u8g_font_fub30);
+  u8g.drawStr(5, 45, "AAAA");  
+  Serial.println("Fin de función draw");
+}
+
+void setup()  
+{  
+    Serial.begin(115200);
+    pinMode(22, OUTPUT);  
+    pinMode(23, OUTPUT);  
+}  
+void loop()   
+{  
+  // picture loop
+  u8g.firstPage();  
+  do {
+    draw();
+  } while( u8g.nextPage() );
+  
+  // rebuild the picture after some delay
+  delay(100);
+    digitalWrite(led1, HIGH); // turn the LED on (HIGH is the voltage level)  
+    delay(200); // wait for a second  
+    digitalWrite(led1, LOW); // turn the LED off by making the voltage LOW  
+    delay(10); // wait for a second  
+    digitalWrite(led2, HIGH); // turn the LED on (HIGH is the voltage level)  
+    delay(200); // wait for a second  
+    digitalWrite(led2, LOW); // turn the LED off by making the voltage LOW  
+    delay(10); // wait for a second  
+
+  /* Method 2: Use the waitForButton() function, which blocks and
+   * doesn't return until a button press and release are
+   * detected. This function takes care of button debouncing. */
+  Serial.println("Estoy en 0035");
+  button.waitForButton();
+  Serial.println("Estoy en 0040");
+
+  // blink LED
+  digitalWrite(led1, HIGH);
+  delay(100);
+  digitalWrite(led1, LOW);
+  delay(100);
+  digitalWrite(led2, HIGH);
+  delay(100);
+  digitalWrite(led2, LOW);
+  delay(100);
+  digitalWrite(led1, HIGH);
+  delay(100);
+  digitalWrite(led1, LOW);
+  delay(100);
+  digitalWrite(led2, HIGH);
+  delay(100);
+  digitalWrite(led2, LOW);
+  delay(100);
+  // picture loop
+
+}
+
