@@ -10,16 +10,19 @@
 #include <Wire.h>
 #endif
 
-
 U8G2_SSD1309_128X64_NONAME0_F_4W_SW_SPI u8g2(U8G2_R0, /* clock=*/ 13, /* data=*/ 11, /* cs=*/ 10, /* dc=*/ 9, /* reset=*/ 8); 
 
+/* Definimos los pulsadores y les asignamos el pin donde están conectados */
 #define BUTTON_PIN 24
 Pushbutton button(BUTTON_PIN);
 
+/* Definimos los leds y les asignamos el pin donde están conectados */
 int led1 = 22;  
 int led2 = 23;
 String pos_1 = "11";
 String pos_2 = "22";
+
+//
 
 void draw1() {
   
