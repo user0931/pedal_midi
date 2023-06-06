@@ -108,7 +108,7 @@ void button_1_1_pressed() {
   delay(200); // wait for a second  
   digitalWrite(led_1_2, LOW); // turn the LED off by making the voltage LOW  
   delay(10); // wait for a second
-  Serial_println("Pulsado boton 1 cambio Stomps")
+  Serial.println("Pulsado boton 1 cambio Stomps");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
   draw1("44", "z");
@@ -116,98 +116,98 @@ void button_1_1_pressed() {
 void button_1_2_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton 2 cambio Stomps")
+  Serial.println("Pulsado boton 2 cambio Stomps");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_1_3_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton 3 cambio Stomps")
+  Serial.println("Pulsado boton 3 cambio Stomps");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_1_4_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton 4 cambio Stomps")
+  Serial.println("Pulsado boton 4 cambio Stomps");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_1_5_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton incrementa performance")
+  Serial.println("Pulsado boton incrementa performance");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_2_1_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton 1 cambio Effects")
+  Serial.println("Pulsado boton 1 cambio Effects");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_2_2_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton 2 cambio Effects")
+  Serial.println("Pulsado boton 2 cambio Effects");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_2_3_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton 3 cambio Effects")
+  Serial.println("Pulsado boton 3 cambio Effects");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_2_4_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton 4 cambio Effects")
+  Serial.println("Pulsado boton 4 cambio Effects");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_2_5_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton decrementa performance")
+  Serial.println("Pulsado boton decrementa performance");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_3_1_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton 1 cambio Performance")
+  Serial.println("Pulsado boton 1 cambio Performance");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_3_2_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton 2 cambio Performance")
+  Serial.println("Pulsado boton 2 cambio Performance");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_3_3_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton 3 cambio Performance")
+  Serial.println("Pulsado boton 3 cambio Performance");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_3_4_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton 4 cambio Performance")
+  Serial.println("Pulsado boton 4 cambio Performance");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
 void button_3_5_pressed() { 
   Serial.print("Comienza función: ");
   Serial.println(__func__);
-  Serial_println("Pulsado boton 5 cambio Performance")
+  Serial.println("Pulsado boton 5 cambio Performance");
   Serial.print("Fin de la función: ");
   Serial.println(__func__);
 }
